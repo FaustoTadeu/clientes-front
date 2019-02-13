@@ -1,9 +1,9 @@
 import { VendedoresDTO } from './vendedores.dto';
 
-export interface ClienteDTO {
+export interface ClientesDTO {
     idCliente: number;
     nomeCliente : string;
     cpfCliente : number;
     sexoCliente : string;
-    vendedorCliente: VendedoresDTO;
+    vendedorCliente: number;
 }

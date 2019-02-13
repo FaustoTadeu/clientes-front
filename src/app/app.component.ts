@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MatTableDataSource, MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +6,5 @@ import { MatTableDataSource, MatSort } from '@angular/material';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'clientes-front';
+  title = 'Vendedores / Clientes da Engineering do Brasil';
 }

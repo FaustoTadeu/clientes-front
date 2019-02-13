@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { VendedoresDTO } from '../model/vendedores.dto';
+import { Component, OnInit, Input } from '@angular/core';
+import { VendedoresDTO } from '../../model/vendedores.dto';
+import { VendedoresService } from 'src/service/vendedores.service';
+import { ClientesService } from 'src/service/clientes.service';
+
 
 @Component({
   selector: 'app-table-vendedores',
@@ -7,25 +10,30 @@ import { VendedoresDTO } from '../model/vendedores.dto';
   styleUrls: ['./table-vendedores.component.css']
 })
 export class TableVendedoresComponent implements OnInit {
-
-  ELEMENT_DATA: VendedoresDTO[] = [
-    {idVendedor: 1, nomeVendedor: 'Hydrogen', cpfVendedor: 10079},
-    {idVendedor: 2, nomeVendedor: 'Hydrogen', cpfVendedor: 10079},
-    {idVendedor: 3, nomeVendedor: 'Hydrogen', cpfVendedor: 10079},
-    {idVendedor: 4, nomeVendedor: 'Hydrogen', cpfVendedor: 10079},
-    {idVendedor: 5, nomeVendedor: 'Hydrogen', cpfVendedor: 10079},
-    {idVendedor: 6, nomeVendedor: 'Hydrogen', cpfVendedor: 10079}
-  ];
-
-  title = "Hello World";
-
+  
   displayedColumns = ['idVendedor', 'nomeVendedor', 'cpfVendedor'];
 
   dataSource : VendedoresDTO[];
+  @Input() vendedorCliente: any;
 
-  constructor() { }
+  constructor(private vendedoresService: VendedoresService,
+              private clientesService: ClientesService) { }
 
   ngOnInit() {
-    this.dataSource = this.ELEMENT_DATA;
+    this.findAllVendedores();
+  }
+
+  findAllVendedores() {
+    this.vendedoresService.findAll().subscribe(
+      response => {
+        this.dataSource = response;
+      },
+      error => {
+        console.log(error);
+      });
+  }
+
+  filtroClientes (element) {
+    this.vendedorCliente = element;
   }
 }

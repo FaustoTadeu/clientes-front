@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Cadastrar Vendedor</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+      <input matInput [(ngModel)]="nomeVendedor"  placeholder="Nome do Vendedor">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput  [(ngModel)]="cpfVendedor"  placeholder="Cpf do Vendedor">
+      </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button (click)="inserirVendedor()" [mat-dialog-close]="nomeVendedor" cdkFocusInitial>Salvar</button>
+</div>

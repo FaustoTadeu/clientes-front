@@ -1,8 +1,25 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-<app-table-vendedores></app-table-vendedores>
-
+  <h2>
+    {{ title }}!
+  </h2>
+  <br />
+  <div class="container">
+    <div class="row">
+      <div class="col col-md-5">
+        <div class="row">
+          <div class="col">
+            <app-table-vendedores [vendedorCliente] = "recebeVendedor"></app-table-vendedores>
+          </div>
+        </div>
+      </div>
+      <div class="col col-md-5">
+        <div class="row">
+          <div class="col">
+            <app-table-clientes ></app-table-clientes>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <router-outlet></router-outlet>
