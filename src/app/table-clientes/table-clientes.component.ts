@@ -10,7 +10,7 @@ import { VendedoresDTO } from 'src/model/vendedores.dto';
 })
 export class TableClientesComponent implements OnInit {
 
-  displayedColumns = ['idCliente', 'nomeCliente', 'cpfCliente', 'sexoCliente', 'idVendedor'];
+  displayedColumns = ['idCliente', 'nomeCliente', 'cpfCliente', 'sexoCliente', 'idVendedor', 'actionsColumn'];
 
   dataSource : ClientesDTO[];
 

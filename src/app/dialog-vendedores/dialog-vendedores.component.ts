@@ -1,5 +1,7 @@
-import {Component, Inject} from '@angular/core';
+import {Component, Inject, Output, EventEmitter, Input} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { VendedoresService } from 'src/service/vendedores.service';
+import { VendedoresDTO } from 'src/model/vendedores.dto';
 
 export interface DialogData {
   nomeVendedor: string;
@@ -17,20 +19,49 @@ export interface DialogData {
 
 export class DialogVendedoresComponent {
 
-  nomeVendedor: string;
-  cpfVendedor: string;
+  @Output() reloadTable: EventEmitter<object> = new EventEmitter();
 
-  constructor(public dialog: MatDialog) {}
+  @Input() data: VendedoresDTO;
+  @Input() dataDelete: VendedoresDTO;
+  constructor(public dialog: MatDialog, 
+              private vendedoresService: VendedoresService) {}
+
+  ngOnChanges() {
+    if(this.data != undefined) {
+      this.openDialog();
+    } else if(this.dataDelete != undefined) {
+     const r =  confirm("Deseja realmente apagar este Vendedor?");
+     if (r == true){
+      this.vendedoresService.deleteVendedor(this.dataDelete).subscribe(
+        response => {
+          this.reloadTable.emit({
+            atualizar: true
+          });
+        },
+        error => {
+          console.log(error);
+        });
+      }
+    }
+  }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogVendedoresDialog, {
-      width: '250px',
-      data: {nomeVendedor: this.nomeVendedor, cpfVendedor: this.cpfVendedor}
+      width: '400px',
+      data: {
+        idVendedor: this.data == undefined ? undefined : this.data.idVendedor, 
+        nomeVendedor: this.data == undefined ? undefined : this.data.nomeVendedor, 
+        cpfVendedor: this.data == undefined ? undefined : this.data.cpfVendedor
+      },
+      disableClose: true
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.nomeVendedor = result;
-      console.log(result);
+    dialogRef.afterClosed().subscribe(result => { 
+      this.reloadTable.emit({
+        atualizar: true
+      });
+     this.data = undefined;
+     this.dataDelete = undefined;
     });
   }
 }
@@ -41,17 +72,30 @@ export class DialogVendedoresComponent {
 })
 export class DialogVendedoresDialog {
 
-  constructor(
+  constructor(private vendedoresService: VendedoresService,
     public dialogRef: MatDialogRef<DialogVendedoresDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+
+    }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  inserirVendedor() {
-    console.log("Passei");
-    
+  salvarVendedor(data) {
+    if(data != undefined) {
+      if (data.nomeVendedor == '') {
+          alert('Nome nao pode ser vazio');
+      } else if (data.cpfVendedor == '') {
+        alert('CPF nao pode ser vazio');
+      } else {
+        this.vendedoresService.addOrEditVendedor(data).subscribe(
+          response => {
+          },
+          error => {
+            console.log(error);
+          });
+      }
+    }
   }
-
 }

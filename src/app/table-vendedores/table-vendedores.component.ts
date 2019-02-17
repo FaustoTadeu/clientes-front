@@ -1,8 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { VendedoresDTO } from '../../model/vendedores.dto';
 import { VendedoresService } from 'src/service/vendedores.service';
 import { ClientesService } from 'src/service/clientes.service';
-
 
 @Component({
   selector: 'app-table-vendedores',
@@ -11,10 +10,13 @@ import { ClientesService } from 'src/service/clientes.service';
 })
 export class TableVendedoresComponent implements OnInit {
   
-  displayedColumns = ['idVendedor', 'nomeVendedor', 'cpfVendedor'];
+  displayedColumns = ['idVendedor', 'nomeVendedor', 'cpfVendedor', 'actionsColumn'];
+
+  data : VendedoresDTO;
+
+  dataDelete: VendedoresDTO;
 
   dataSource : VendedoresDTO[];
-  @Input() vendedorCliente: any;
 
   constructor(private vendedoresService: VendedoresService,
               private clientesService: ClientesService) { }
@@ -33,7 +35,16 @@ export class TableVendedoresComponent implements OnInit {
       });
   }
 
-  filtroClientes (element) {
-    this.vendedorCliente = element;
+  reloadTable($event) {
+    this.findAllVendedores();
   }
+
+  edit(element) {
+    this.data = element;
+  } 
+
+  delete(element) {
+    this.dataDelete = element;
+  }
+
 }
