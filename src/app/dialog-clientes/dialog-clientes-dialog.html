@@ -1,8 +1,30 @@
-<h1 mat-dialog-title>Hi {{data.nomeVededor}}</h1>
+<h1 mat-dialog-title>Cadastrar Cliente</h1>
 <div mat-dialog-content>
-  <p>Nome Cleinte</p>
+  <mat-form-field [hidden]="true">
+    <input matInput [(ngModel)]="data.idCliente"  placeholder="Id do Cliente">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.nomeCliente"  placeholder="Nome do Cliente">
+  </mat-form-field>
+  <br />
+  <mat-form-field>
+    <input matInput  [(ngModel)]="data.cpfCliente"  placeholder="Cpf do Cliente">
+  </mat-form-field>
+  <br />
+  <mat-radio-group name="Sexo: " [(ngModel)]="data.sexoCliente">
+    <mat-radio-button  value="M">Masculino</mat-radio-button>
+    <mat-radio-button  value="F">Feminino</mat-radio-button>
+  </mat-radio-group>
+  <br />
+  <mat-form-field>
+      <mat-select placeholder="Vendedor" [(ngModel)]="data.vendedorCliente" >
+          <mat-option *ngFor="let vendedores of data.vendedoresList" [value]="vendedores.idVendedor">
+            {{vendedores.nomeVendedor}}
+          </mat-option>
+      </mat-select>
+  </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.nomeVededor" cdkFocusInitial>Ok</button>
+  <button mat-button (click)="cancelar()">Cancelar</button>
+  <button mat-button (click)="salvarCliente(data)" [mat-dialog-close]="data">Salvar</button>
 </div>

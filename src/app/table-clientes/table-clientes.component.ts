@@ -12,18 +12,16 @@ export class TableClientesComponent implements OnInit {
 
   displayedColumns = ['idCliente', 'nomeCliente', 'cpfCliente', 'sexoCliente', 'idVendedor', 'actionsColumn'];
 
-  dataSource : ClientesDTO[];
+  dataCliente : ClientesDTO;
 
-  @Input() recebeVendedor;
+  dataDeleteCliente: ClientesDTO;
+
+  dataSource : ClientesDTO[];
 
   constructor(private clientesService: ClientesService) { }
 
   ngOnInit() {
-    if(this.recebeVendedor == undefined) {
-    this.findAllClientes();
-    } else {
-      this.dataSource = this.recebeVendedor;
-    }
+   this.findAllClientes();
   }
 
   findAllClientes() {
@@ -35,6 +33,18 @@ export class TableClientesComponent implements OnInit {
         console.log(error);
       });
 
+  }
+
+  reloadTable($event) {
+    this.findAllClientes();
+  }
+
+  edit(element) {
+    this.dataCliente = element;
+  } 
+
+  delete(element) {
+    this.dataDeleteCliente = element;
   }
   filtrar($event) {
     console.log($event);

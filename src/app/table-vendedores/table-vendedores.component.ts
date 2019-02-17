@@ -47,4 +47,8 @@ export class TableVendedoresComponent implements OnInit {
     this.dataDelete = element;
   }
 
+  filtroClientes(element) {
+    
+  }
+
 }

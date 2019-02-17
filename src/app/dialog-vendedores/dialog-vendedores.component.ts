@@ -78,15 +78,15 @@ export class DialogVendedoresDialog {
 
     }
 
-  onNoClick(): void {
+  cancelar(): void {
     this.dialogRef.close();
   }
 
   salvarVendedor(data) {
     if(data != undefined) {
-      if (data.nomeVendedor == '') {
+      if (data.nomeVendedor == '' || data.nomeVendedor == undefined ) {
           alert('Nome nao pode ser vazio');
-      } else if (data.cpfVendedor == '') {
+      } else if (data.cpfVendedor == '' || data.cpfVendedor == undefined) {
         alert('CPF nao pode ser vazio');
       } else {
         this.vendedoresService.addOrEditVendedor(data).subscribe(

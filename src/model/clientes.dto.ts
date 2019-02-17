@@ -6,4 +6,5 @@ export interface ClientesDTO {
     cpfCliente : number;
     sexoCliente : string;
     vendedorCliente: number;
+    vendedorClienteList: VendedoresDTO[];
 }

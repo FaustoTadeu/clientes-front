@@ -5,7 +5,9 @@
 </div>
 <div class="row">
   <div class="col">
-      <app-dialog-clientes ></app-dialog-clientes>
+      <app-dialog-clientes [dataCliente]="dataCliente"
+                           [dataDeleteCliente]="dataDeleteCliente"
+                           (reloadTable)="reloadTable($event)" ></app-dialog-clientes>
   </div>
 </div>
 <br />
@@ -35,8 +37,8 @@
       <ng-container matColumnDef="actionsColumn">
           <th mat-header-cell *matHeaderCellDef> Acoes </th>
           <mat-cell *matCellDef="let element">
-              <button mat-button (click)="editar(element)"><img src="../../assets/icon/si-glyph-circle-forward.svg"/></button>
-              <button mat-button (click)="apagar(element)"><img src="../../assets/icon/si-glyph-circle-error.svg"/></button>
+              <button type="button" class="btn btn-info btn-circle" (click)="edit(element)"><i class="fa fa-check"></i></button> &nbsp; &nbsp;
+              <button type="button" class="btn btn-danger btn-circle" (click)="delete(element)"><i class="fa fa-times"></i></button>
           </mat-cell>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
