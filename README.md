@@ -17,4 +17,4 @@ Instruções
 - 5 – Acessar a url http://localhost:4200
 
 
-É necessário estar com o Web Service “Clientes” em execução. Instruções de como baixar e instalar  no readme do projeto 
+É necessário estar com o Web Service “Clientes” em execução. Instruções de como baixar e instalar o webservice no readme do projeto. 
