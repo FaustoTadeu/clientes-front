@@ -47,7 +47,7 @@ export class DialogVendedoresComponent {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogVendedoresDialog, {
-      width: '400px',
+      width: '250px',
       data: {
         idVendedor: this.data == undefined ? undefined : this.data.idVendedor, 
         nomeVendedor: this.data == undefined ? undefined : this.data.nomeVendedor, 
@@ -84,8 +84,8 @@ export class DialogVendedoresDialog {
 
   salvarVendedor(data) {
     if(data != undefined) {
-      if (data.nomeVendedor == '' || data.nomeVendedor == undefined ) {
-          alert('Nome nao pode ser vazio');
+      if (data.nomeVendedor.length < 10 || data.nomeVendedor.length > 50 || data.nomeVendedor == undefined) {
+        alert('O Nome deve estar entre 10 e 50 caracteres');
       } else if (data.cpfVendedor == '' || data.cpfVendedor == undefined) {
         alert('CPF nao pode ser vazio');
       } else {

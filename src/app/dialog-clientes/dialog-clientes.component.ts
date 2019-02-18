@@ -60,13 +60,13 @@ export class DialogClientesComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogClientesDialog, {
-      width: '400px',
+      width: '250px',
       data: {
         idCliente: this.dataCliente == undefined ? undefined : this.dataCliente.idCliente, 
         nomeCliente: this.dataCliente == undefined ? undefined : this.dataCliente.nomeCliente, 
         cpfCliente: this.dataCliente == undefined ? undefined : this.dataCliente.cpfCliente,
         sexoCliente: this.dataCliente == undefined ? undefined : this.dataCliente.sexoCliente,
-        vendedorCliente: this.dataCliente == undefined ? undefined : this.dataCliente.vendedorCliente,
+        vendedorCliente: this.dataCliente == undefined ? undefined : this.dataCliente.idVendedor,
         vendedoresList: this.vendedoresList
       },
       disableClose: true
@@ -109,8 +109,8 @@ export class DialogClientesDialog {
 
   salvarCliente(data) {
     if(data != undefined) {
-      if (data.nomeCliente == '' || data.nomeCliente == undefined ) {
-          alert('Nome nao pode ser vazio');
+      if (data.nomeCliente.length < 10 || data.nomeClientelength > 50 || data.nomeCliente == undefined ) {
+        alert('O Nome deve estar entre 10 e 50 caracteres');
       } else if (data.cpfCliente == '' || data.cpfCliente == undefined) {
         alert('CPF nao pode ser vazio');
       } else if (data.sexoCliente == '' || data.sexoCliente == undefined){

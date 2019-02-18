@@ -1,10 +1,5 @@
 <div class="row">
   <div class="col">
-    <h4>Clientes</h4>
-  </div>
-</div>
-<div class="row">
-  <div class="col">
       <app-dialog-clientes [dataCliente]="dataCliente"
                            [dataDeleteCliente]="dataDeleteCliente"
                            (reloadTable)="reloadTable($event)" ></app-dialog-clientes>
@@ -13,33 +8,33 @@
 <br />
 <div class="row">
   <div class="col">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      <ng-container matColumnDef="idCliente">
-        <th mat-header-cell *matHeaderCellDef> Cód. </th>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 cursorPointer">
+      <ng-container matColumnDef="idCliente" style="width: 10px">
+        <th mat-header-cell *matHeaderCellDef style="text-align: center"> Cód. </th>
         <td mat-cell *matCellDef="let element"> {{element.idCliente}} </td>
       </ng-container>
       <ng-container matColumnDef="nomeCliente">
-        <th mat-header-cell *matHeaderCellDef> Nome </th>
-        <td mat-cell *matCellDef="let element"> {{element.nomeCliente}} </td>
+        <th mat-header-cell *matHeaderCellDef style="text-align: center"> Nome </th>
+        <td mat-cell *matCellDef="let element" style="text-align: left"> {{element.nomeCliente}} </td>
       </ng-container>
       <ng-container matColumnDef="cpfCliente">
-        <th mat-header-cell *matHeaderCellDef> CPF </th>
+        <th mat-header-cell *matHeaderCellDef style="text-align: center"> CPF </th>
         <td mat-cell *matCellDef="let element"> {{element.cpfCliente}} </td>
       </ng-container>
       <ng-container matColumnDef="sexoCliente">
-        <th mat-header-cell *matHeaderCellDef> Sexo </th>
+        <th mat-header-cell *matHeaderCellDef style="text-align: center"> Sexo </th>
         <td mat-cell *matCellDef="let element"> {{element.sexoCliente}} </td>
       </ng-container>
       <ng-container matColumnDef="idVendedor">
-        <th mat-header-cell *matHeaderCellDef> Cód. Vendedor </th>
-        <td mat-cell *matCellDef="let element"> {{element.idVendedor}} </td>
+        <th mat-header-cell *matHeaderCellDef style="text-align: center"> Vendedor </th>
+        <td mat-cell *matCellDef="let element" style="text-align: left"> {{element.nomeVendedor}} </td>
       </ng-container>
-      <ng-container matColumnDef="actionsColumn">
-          <th mat-header-cell *matHeaderCellDef> Acoes </th>
-          <mat-cell *matCellDef="let element">
-              <button type="button" class="btn btn-info btn-circle" (click)="edit(element)"><i class="fa fa-check"></i></button> &nbsp; &nbsp;
-              <button type="button" class="btn btn-danger btn-circle" (click)="delete(element)"><i class="fa fa-times"></i></button>
-          </mat-cell>
+      <ng-container matColumnDef="actionsColumn" style="width: 20px">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center"> Acoes </th>
+          <td mat-cell *matCellDef="let element">
+              <button type="button" class="btn btn-info btn-circle" (click)="edit(element)" title="Editar Cliente"><i class="fa fa-check"></i></button> &nbsp;
+              <button type="button" class="btn btn-danger btn-circle" (click)="delete(element)" title="Apagar Cliente"><i class="fa fa-times"></i></button>
+          </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

@@ -5,6 +5,7 @@ export interface ClientesDTO {
     nomeCliente : string;
     cpfCliente : number;
     sexoCliente : string;
-    vendedorCliente: number;
-    vendedorClienteList: VendedoresDTO[];
+    idVendedor: number;
+    nomeVendedor?: string;
+    vendedorClienteList?: VendedoresDTO[];
 }

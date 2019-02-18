@@ -1,37 +1,31 @@
 <div class="row">
   <div class="col">
-    <h4>Vendedores</h4>
-  </div>
-</div>
-<div class="row">
-  <div class="col">
       <app-dialog-vendedores [data]="data"
                              [dataDelete]="dataDelete"
                              (reloadTable)="reloadTable($event)"></app-dialog-vendedores>
   </div>
 </div>
-<br />
-<div class="row">
+<div class="row" >
   <div class="col">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      <ng-container matColumnDef="idVendedor">
-        <th mat-header-cell *matHeaderCellDef> Cód. </th>
-        <td mat-cell *matCellDef="let element" (click)= filtroClientes(element) > {{element.idVendedor}} </td>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 cursorPointer">
+      <ng-container matColumnDef="idVendedor" style="width: 10px">
+        <th mat-header-cell *matHeaderCellDef style="text-align: center" > Cód. </th>
+        <td mat-cell *matCellDef="let element"[ngClass]="{selected: element.idVendedor === selectedVendedor}" (click)="setSelected(element); filtroClientes(element)" > {{element.idVendedor}} </td>
       </ng-container>
       <ng-container matColumnDef="nomeVendedor">
-        <th mat-header-cell *matHeaderCellDef> Nome </th>
-        <td mat-cell *matCellDef="let element" (click)= filtroClientes(element)> {{element.nomeVendedor}} </td>
+        <th mat-header-cell *matHeaderCellDef style="text-align: center"> Nome </th>
+        <td mat-cell *matCellDef="let element" style="text-align: left" [ngClass]="{selected: element.idVendedor === selectedVendedor}" (click)= filtroClientes(element)> {{element.nomeVendedor}} </td>
       </ng-container>
       <ng-container matColumnDef="cpfVendedor">
-        <th mat-header-cell *matHeaderCellDef> CPF </th>
-        <td mat-cell *matCellDef="let element" (click)= filtroClientes(element)> {{element.cpfVendedor}} </td>
+        <th mat-header-cell *matHeaderCellDef style="text-align: center"> CPF </th>
+        <td mat-cell *matCellDef="let element" [ngClass]="{selected: element.idVendedor === selectedVendedor}" (click)= filtroClientes(element)> {{element.cpfVendedor}} </td>
       </ng-container>
-      <ng-container matColumnDef="actionsColumn">
-          <th mat-header-cell *matHeaderCellDef> Acoes </th>
-          <mat-cell *matCellDef="let element">
-              <button type="button" class="btn btn-info btn-circle" (click)="edit(element)"><i class="fa fa-check"></i></button> &nbsp; &nbsp;
-              <button type="button" class="btn btn-danger btn-circle" (click)="delete(element)"><i class="fa fa-times"></i></button>
-          </mat-cell>
+      <ng-container matColumnDef="actionsColumn" style="width:20px">
+          <th mat-header-cell *matHeaderCellDef style="text-align: center"> Acoes </th>
+          <td mat-cell *matCellDef="let element" [ngClass]="{selected: element.idVendedor === selectedVendedor}">
+              <button type="button" class="btn btn-info btn-circle" (click)="edit(element)" title="Editar Vendedor"><i class="fa fa-check"></i></button> &nbsp;
+              <button type="button" class="btn btn-danger btn-circle" (click)="delete(element)" title="Apagar Vendedor"><i class="fa fa-times"></i></button>
+          </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

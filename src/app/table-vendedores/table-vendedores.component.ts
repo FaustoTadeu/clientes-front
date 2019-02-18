@@ -18,6 +18,8 @@ export class TableVendedoresComponent implements OnInit {
 
   dataSource : VendedoresDTO[];
 
+  selectedVendedor:number = undefined;
+
   constructor(private vendedoresService: VendedoresService,
               private clientesService: ClientesService) { }
 
@@ -47,8 +49,13 @@ export class TableVendedoresComponent implements OnInit {
     this.dataDelete = element;
   }
 
-  filtroClientes(element) {
-    
+  filtroClientes(element) { 
+    if (this.selectedVendedor == undefined ||  this.selectedVendedor != element.idVendedor) {
+      this.clientesService.changeClientesList(element.idVendedor, true);
+      this.selectedVendedor = element.idVendedor;
+    } else if (this.selectedVendedor == element.idVendedor){  
+      this.clientesService.changeClientesList(element.idVendedor, false);
+      this.selectedVendedor = undefined;
+    }
   }
-
 }
